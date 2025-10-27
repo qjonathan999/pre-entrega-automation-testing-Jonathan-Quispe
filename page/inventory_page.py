@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
 
 class InventoryPage:
     _INVENTORY_CONTAINER="inventory_container"
@@ -30,3 +31,16 @@ class InventoryPage:
             nombre=productos[0].find_element("class name",self._INVENTORY_ITEM_NAME).text
             return nombre
         return None
+    
+    def logout(self):
+        menu_button_id="react-burger-menu-btn"
+        logout_sidebar_link_id="logout_sidebar_link"
+        WebDriverWait(self.driver,5).until(EC.element_to_be_clickable(("id", menu_button_id))).click()
+        time.sleep(3)  # Espera breve para que se abra el menú
+        WebDriverWait(self.driver,5).until(EC.element_to_be_clickable(("id", logout_sidebar_link_id))).click()
+        time.sleep(3)  # Espera breve para que se complete el logout
+
+    def click_to_cart(self):
+        cart_button_class="shopping_cart_link"
+        WebDriverWait(self.driver,5).until(EC.element_to_be_clickable(("class name", cart_button_class))).click()
+        time.sleep(2)  # Espera breve para que se abra el carrito    

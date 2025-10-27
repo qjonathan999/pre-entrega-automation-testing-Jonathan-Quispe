@@ -14,7 +14,7 @@ class LoginPage:
     def open(self):
         self.driver.get(URL)
 
-    def login(self,username,password):
+    def login(self,username=USERNAME,password=PASSWORD):
         WebDriverWait(self.driver,5).until(EC.visibility_of_element_located(("id", self._NAME_INPUT)))
         self.driver.find_element("id", self._NAME_INPUT).send_keys(username)
         self.driver.find_element("id", self._PASSWORD_INPUT).send_keys(password)

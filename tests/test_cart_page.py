@@ -11,12 +11,8 @@ def test_inventory(driver):
     loginPage.login()
 
     inventoryPage.is_loaded()
-    # Verificación adicional: URL contiene inventory
     inventoryPage.is_inventory_page()
     assert inventoryPage.exist_products()
-    
-    log.info(f"Primer producto: {inventoryPage.get_first_product_name()}")
 
-    inventoryPage.logout()
-    assert "https://www.saucedemo.com/" in driver.current_url
-    log.info("El usuario ha cerrado sesión correctamente.")
+    inventoryPage.click_to_cart()
+    assert "cart.html" in driver.current_url
