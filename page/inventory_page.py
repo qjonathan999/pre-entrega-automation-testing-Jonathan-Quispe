@@ -40,6 +40,17 @@ class InventoryPage:
         WebDriverWait(self.driver,5).until(EC.element_to_be_clickable(("id", logout_sidebar_link_id))).click()
         time.sleep(3)  # Espera breve para que se complete el logout
 
+    def get_cant_productos(self):
+        productos=self.driver.find_elements("class name", self._INVENTORY_ITEM)
+        return len(productos)
+
+    def select_product_by_index(self, index):
+        productos=self.driver.find_elements("class name", self._INVENTORY_ITEM)
+        if 0 <= index < len(productos):
+            add_button = productos[index].find_element("tag name", "button")
+            WebDriverWait(self.driver,5).until(EC.element_to_be_clickable(add_button)).click()
+            time.sleep(1)  # Espera breve para que se procese la acción    
+
     def click_to_cart(self):
         cart_button_class="shopping_cart_link"
         WebDriverWait(self.driver,5).until(EC.element_to_be_clickable(("class name", cart_button_class))).click()
